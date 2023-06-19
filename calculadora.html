@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="calculadora.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contenedor">
+      <input type="number" id="resultado" />
+      <div class="numeros">
+        <div class="fila">
+          <input type="button" value="1" class="numero" onclick="handleClick(1)" />
+          <input type="button" value="2" class="numero" onclick="handleClick(2)" />
+          <input type="button" value="3" class="numero" onclick="handleClick(3)" />
+        </div>
+        <div class="fila">
+          <input type="button" value="4" class="numero" onclick="handleClick(4)" />
+          <input type="button" value="5" class="numero" onclick="handleClick(5)" />
+          <input type="button" value="6" class="numero" onclick="handleClick(6)" />
+        </div>
+        <div class="fila">
+          <input type="button" value="7" class="numero" onclick="handleClick(7)" />
+          <input type="button" value="8" class="numero" onclick="handleClick(8)" />
+          <input type="button" value="9" class="numero" onclick="handleClick(9)" />
+        </div>
+        <div class="fila">
+          <input type="button" value="0" class="numero" onclick="handleClick(0)" />
+          <input
+            type="button"
+            value="."
+            class="numero"
+            onclick="handleClick('.')"
+          />
+          <input type="button" value="C" class="numero" onclick="borrar()" />
+        </div>
+      </div>
+      <div class="operadores">
+        <div class="filas">
+          <input type="button" value="+" class="operador" onclick="handleClick('+')" />
+          <input type="button" value="-" class="operador" onclick="handleClick('-')" />
+        </div>
+        <div class="filas">
+          <input type="button" value="*" class="operador" onclick="handleClick('*')" />
+          <input type="button" value="/" class="operador" onclick="handleClick('/')" />
+        </div>
+        <div class="filas">
+          <input type="button" value="^" class="operador" onclick="handleClick('^')" />
+          <input type="button" value="√" class="operador" onclick="handleClick('√')" />
+        </div>
+        <div class="filas">
+          <input type="button" value="=" class="operador igual" onclick="handleClick('=')" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let numero1;
+    let numero2;
+    let operacion;
+
+    function handleClick(value) {
+      if (typeof value === "number" || value === ".") {
+        if (document.getElementById("resultado").value == 0) {
+          document.getElementById("resultado").value = value;
+        } else {
+          document.getElementById("resultado").value += value;
+        }
+      } else if (value === "=") {
+        numero2 = parseFloat(document.getElementById("resultado").value);
+        let resultado;
+
+        switch (operacion) {
+          case "+":
+            resultado = numero1 + numero2;
+            break;
+          case "-":
+            resultado = numero1 - numero2;
+            break;
+          case "*":
+            resultado = numero1 * numero2;
+            break;
+          case "/":
+            resultado = numero1 / numero2;
+            break;
+          case "^":
+            resultado = Math.pow(numero1, numero2);
+            break;
+          case "√":
+            resultado = Math.sqrt(numero2);
+            break;
+          case ".":
+            resultado = Math.pow(numero1, numero2);
+            break;
+          default:
+            break;
+        }
+
+        document.getElementById("resultado").value = resultado;
+      } else {
+        numero1 = parseFloat(document.getElementById("resultado").value);
+        operacion = value;
+        document.getElementById("resultado").value = "0";
+      }
+    }
+
+    function borrar() {
+      document.getElementById("resultado").value = "";
+      numero1 = 0;
+      numero2 = 0;
+      operacion = "";
+    }
+  </script>
+  <style>
+    body {
+      margin: 0%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(24, 215, 113, 0.514);
+    }
+
+    .contenedor {
+      text-align: center;
+    height: 40%;
+    width: 60%;
+    background-color: rgb(0, 0, 0);
+    border: solid 3px rgb(115, 236, 28);
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+    .fila {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .numero,.operador{
+      background-color: rgb(93, 91, 91);
+      color: white;
+      border: 50;
+    }
+    .numero {
+      align-content: center;
+      height: 60%;
+      margin: 1%;
+      width: 30%;
+    }
+
+    .numeros {
+      width: 60%;
+      margin-top: 4%;
+    }
+
+    .operadores {
+      display: flex;
+      flex-direction: column;
+      margin-top: 4%;
+      width: 20%;
+      height: 80%;
+      justify-content: start;
+      align-content: center;
+    }
+
+    .operador {
+      margin-top: 4%;
+      width: 40%;
+    }
+
+    .igual {
+      margin-top: 5%;
+      width: 88%;
+    }
+    #resultado{
+      width: 90%;
+      margin-top: 5%;
+      background-color: rgb(99, 95, 95);
+      color: white;
+      text-align: end;
+      border: solid 3px rgb(118, 115, 115);
+    }
+    .filas{
+      margin-top: 1%;
+    }
+    .operador{
+      margin-left: 4%;
+    }
+  </style>
+</html>
